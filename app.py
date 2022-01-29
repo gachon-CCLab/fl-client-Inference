@@ -7,6 +7,7 @@ app = FastAPI()
 
 
 class inference_status(BaseModel):
+    infer_online:bool = True
     running: bool = False
     updating: bool = False
 
@@ -30,6 +31,11 @@ def get_start():
 def get_update():
     global status
     status.updating = True
+    return status
+
+@app.get('/online')
+def get_info():
+    status.running = True
     return status
 
 
